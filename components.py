@@ -1,5 +1,6 @@
 import argparse
 from typing import List, Tuple
+import sys
 
 
 def count_components(n: int, edges: List[Tuple[int, int]]) -> int:
@@ -66,4 +67,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
