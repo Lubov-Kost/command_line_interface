@@ -1,0 +1,14 @@
+>Розалинда_1 
+ATCCAGC
+>Розалинда_2 
+GGGCAACT 
+>Розалинда_3 
+ATGGATCT 
+>Розалинда_4 
+AAGCAACC 
+>Розалинда_5 
+TTGGAACT 
+>Розалинда_6 
+ATGCCATT 
+>Розалинда_7 
+ATGGCACT
