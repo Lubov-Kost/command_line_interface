@@ -1,6 +1,6 @@
 import argparse
 from typing import Dict, List, Tuple
-
+import sys
 
 def matrix(file) -> Tuple[Dict[str, List[int]], str]:
     """
@@ -64,14 +64,18 @@ def main():
         print(profile)
 
     except FileNotFoundError:
-        print("Файл не найден")
+        print("Файл не найден", file=sys.stderr)
+        sys.exit(1)
     except ValueError as e:
-        print(e)
+        print(e, file=sys.stderr)
+        sys.exit(1)
     except Exception:
-        print(f"Ошибка при чтении файла: {e}")
+        print(f"Ошибка при чтении файла: {e}", file=sys.stderr)
+        sys.exit(1)
     else:
         print("Все работает")
 
 
 if __name__ == "__main__":
     main()
+
