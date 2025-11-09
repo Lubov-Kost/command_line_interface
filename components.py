@@ -13,7 +13,10 @@ def count_components(n: int, edges: List[Tuple[int, int]]) -> int:
     Returns:
         int: количество связанных компонентов в графе.
     """
-    graph = {i: [] for i in range(1, n + 1)}
+    graph = {}
+    for i in range(1, n + 1):
+        graph[i] = []
+        
     for u, v in edges:
         graph[u].append(v)
         graph[v].append(u)
@@ -22,16 +25,17 @@ def count_components(n: int, edges: List[Tuple[int, int]]) -> int:
     count = 0
 
     for i in range(1, n + 1):
-        if i not in visited:
-            stack = [i]
-            visited.add(i)
-            while stack:
-                node = stack.pop()
-                for neighbor in graph[node]:
-                    if neighbor not in visited:
-                        visited.add(neighbor)
-                        stack.append(neighbor)
-            count += 1
+        if i in visited:
+            continue
+        stack = [i]
+        visited.add(i)
+        count += 1
+        while stack:
+            node = stack.pop()
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    stack.append(neighbor)
     return count
 
 
@@ -44,19 +48,22 @@ def main():
 
     try:
         with open(args.file, "r") as f:
-            data = [line.strip() for line in f if line.strip()]
-
-        n, m = map(int, data[0].split())
-        edges = [tuple(map(int, line.split())) for line in data[1:]]
+            n, m = map(int, f.readline().split())
+            edges = [tuple(map(int, line.split())) for line in f if line.strip()]
+            
         print(count_components(n, edges))
 
     except FileNotFoundError:
-        print("Файл не найден")
+        print("Файл не найден", file=sys.stderr)
+        sys.exit(1)
     except ValueError as e:
-        print(e)
+        print(e, file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
-        print(f"Ошибка при чтении файла: {e}")
+        print(f"Ошибка при чтении файла: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
+
